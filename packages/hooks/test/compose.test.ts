@@ -1,7 +1,6 @@
 // Adapted from koa-compose (https://github.com/koajs/compose)
-
-import { compose, NextFunction } from '../src/compose';
 import { strict as assert } from 'assert';
+import { compose, NextFunction } from '../src';
 
 function wait (ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms || 1));

@@ -1,6 +1,9 @@
 import { strict as assert } from 'assert';
-import { functionHooks, ORIGINAL, HOOKS, CONTEXT, HookContext, initContext, createContext } from '../src/function';
-import { NextFunction } from '../src/compose';
+import {
+  hooks, ORIGINAL, HOOKS, CONTEXT,
+  HookContext, initContext, createContext,
+  functionHooks, NextFunction
+} from '../src/';
 
 describe('functionHooks', () => {
   const hello = async (name: string) => {
@@ -17,7 +20,7 @@ describe('functionHooks', () => {
   });
 
   it('returns a new function, sets ORIGINAL, HOOKS and CONTEXT', () => {
-    const fn = functionHooks(hello, []) as any;
+    const fn = hooks(hello, []) as any;
 
     assert.notDeepEqual(fn, hello);
     assert.deepStrictEqual(fn[HOOKS], []);
@@ -34,14 +37,14 @@ describe('functionHooks', () => {
       await next();
     };
 
-    const fn = functionHooks(hello, [ addYou ]);
+    const fn = hooks(hello, [ addYou ]);
     const res = await fn('There');
 
     assert.strictEqual(res, 'Hello There You');
   });
 
   it('can override context.result before, skips method call', async () => {
-    const hello = async () => {
+    const hello = async (_name: string) => {
       throw new Error('Should never get here');
     };
     const updateResult = async (ctx: HookContext, next: NextFunction) => {
@@ -50,7 +53,7 @@ describe('functionHooks', () => {
       await next();
     };
 
-    const fn = functionHooks(hello, [ updateResult ]);
+    const fn = hooks(hello, [ updateResult ]);
     const res = await fn('There');
 
     assert.strictEqual(res, 'Hello Dave');
@@ -63,7 +66,7 @@ describe('functionHooks', () => {
       ctx.result += ' You!';
     };
 
-    const fn = functionHooks(hello, [ updateResult ]);
+    const fn = hooks(hello, [ updateResult ]);
     const res = await fn('There');
 
     assert.strictEqual(res, 'Hello There You!');
@@ -77,7 +80,7 @@ describe('functionHooks', () => {
     const obj = {
       message: 'Hi',
 
-      sayHi: functionHooks(async function (this: any, name: string) {
+      sayHi: hooks(async function (this: any, name: string) {
         return `${this.message} ${name}`;
       }, [ hook ])
     };
@@ -87,14 +90,14 @@ describe('functionHooks', () => {
   });
 
   it('adds additional hooks to an existing function, uses original', async () => {
-    const first = functionHooks(hello, [
+    const first = hooks(hello, [
       async (ctx, next) => {
         await next();
 
         ctx.result += ' First';
       }
     ]);
-    const second = functionHooks(first, [
+    const second = hooks(first, [
       async (ctx, next) => {
         await next();
 
@@ -112,7 +115,7 @@ describe('functionHooks', () => {
   });
 
   it('creates context with params and converts to arguments', async () => {
-    const fn = functionHooks(hello, [
+    const fn = hooks(hello, [
       async (ctx, next) => {
         assert.equal(ctx.name, 'Dave');
 
@@ -128,12 +131,12 @@ describe('functionHooks', () => {
   it('with named context ctx.arguments is frozen', async () => {
     const modifyArgs = async (ctx: HookContext, next: NextFunction) => {
       ctx.arguments[0] = 'Test';
-      
+
       await next();
     };
 
-    const fn = functionHooks(hello, [ modifyArgs ], initContext('name'));
-    
+    const fn = hooks(hello, [ modifyArgs ], initContext('name'));
+
     await assert.rejects(() => fn('There'), {
       message: `Cannot assign to read only property '0' of object '[object Array]'`
     });
@@ -148,7 +151,7 @@ describe('functionHooks', () => {
       await next();
     };
 
-    const fn = functionHooks(hello, [ checkContext ], () => {
+    const fn = hooks(hello, [ checkContext ], () => {
       const ctx = new HookContext();
 
       ctx.test = 'me';
@@ -162,7 +165,7 @@ describe('functionHooks', () => {
 
   it('can create and return an existing context', async () => {
     const message = 'Custom message';
-    const fn = functionHooks(hello, [
+    const fn = hooks(hello, [
       async (ctx, next) => {
         assert.equal(ctx.name, 'Dave');
         assert.equal(ctx.message, message);
@@ -173,6 +176,7 @@ describe('functionHooks', () => {
     ], initContext('name'));
 
     const customContext = createContext(fn, { message });
+    // @ts-ignore
     const resultContext = await fn('Dave', customContext);
 
     assert.equal(resultContext, customContext);

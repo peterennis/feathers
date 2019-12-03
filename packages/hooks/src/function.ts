@@ -16,7 +16,7 @@ export class HookContext<T = any> {
         ...result,
         [key]: this[key]
       };
-    }, {} as any);
+    }, {} as { [key: string]: any });
   }
 }
 
@@ -52,11 +52,11 @@ export const createContext = <T = any>(fn: any, data: { [key: string]: any } = {
   }
 
   const context = getContext();
-  
+
   return Object.assign(context, data);
 };
 
-export const functionHooks = (method: any, _hooks: Middleware[], defaultContext: ContextCreator = initContext()) => {
+export const functionHooks = <T = any>(method: any, _hooks: Array<Middleware<T>>, defaultContext: ContextCreator<T> = initContext()) => {
   if (typeof method !== 'function') {
     throw new Error('Can not apply hooks to non-function');
   }

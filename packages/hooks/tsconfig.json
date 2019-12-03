@@ -4,6 +4,7 @@
     "src/**/*.ts"
   ],
   "compilerOptions": {
-    "outDir": "src"    
+    "outDir": "lib",
+    "experimentalDecorators": true
   }
 }
