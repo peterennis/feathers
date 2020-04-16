@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.2](https://github.com/feathersjs/feathers/compare/v4.5.1...v4.5.2) (2020-03-04)
+
+
+### Bug Fixes
+
+* Updated typings for express middleware ([#1839](https://github.com/feathersjs/feathers/issues/1839)) ([6b8e897](https://github.com/feathersjs/feathers/commit/6b8e8971a9dbb08913edd1be48826624645d9dc1))
+* **authentication:** Improve JWT strategy configuration error message ([#1844](https://github.com/feathersjs/feathers/issues/1844)) ([2c771db](https://github.com/feathersjs/feathers/commit/2c771dbb22d53d4f7de3c3f514e57afa1a186322))
+* **package:** update grant-profile to version 0.0.11 ([#1841](https://github.com/feathersjs/feathers/issues/1841)) ([5dcd2aa](https://github.com/feathersjs/feathers/commit/5dcd2aa3483059cc7a2546b145dd72b4705fe2fe))
+* **test:** typo in password ([#1797](https://github.com/feathersjs/feathers/issues/1797)) ([dfba6ec](https://github.com/feathersjs/feathers/commit/dfba6ec2f21adf3aa739218cf870eaaaa5df6e9c))
+* **typescript:** Make HookMap and HookObject generics. ([#1815](https://github.com/feathersjs/feathers/issues/1815)) ([d10145d](https://github.com/feathersjs/feathers/commit/d10145d91a09aef7bce5af80805a3c0fa9d94f26))
+
+
+
+
+
+## [4.5.1](https://github.com/feathersjs/feathers/compare/v4.5.0...v4.5.1) (2020-01-24)
+
+**Note:** Version bump only for package feathers
+
+
+
+
+
+# [4.5.0](https://github.com/feathersjs/feathers/compare/v4.4.3...v4.5.0) (2020-01-18)
+
+
+### Bug Fixes
+
+* Add `params.authentication` type, remove `hook.connection` type ([#1732](https://github.com/feathersjs/feathers/issues/1732)) ([d46b7b2](https://github.com/feathersjs/feathers/commit/d46b7b2abac8862c0e4dbfce20d71b8b8a96692f))
+
+
+### Features
+
+* **authentication-oauth:** Set oAuth redirect URL dynamically and pass query the service ([#1737](https://github.com/feathersjs/feathers/issues/1737)) ([0b05f0b](https://github.com/feathersjs/feathers/commit/0b05f0b58a257820fa61d695a36f36455209f6a1))
+* **rest-client:** Allow for customising rest clients ([#1780](https://github.com/feathersjs/feathers/issues/1780)) ([c5cfec7](https://github.com/feathersjs/feathers/commit/c5cfec7a4aafcaffaab0cdacb9b5d297ff20320f))
+
+
+
+
+
 ## [4.4.3](https://github.com/feathersjs/feathers/compare/v4.4.1...v4.4.3) (2019-12-06)
 
 
