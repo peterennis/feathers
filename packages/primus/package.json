@@ -40,19 +40,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@feathersjs/transport-commons": "^4.5.3",
+    "@feathersjs/transport-commons": "^4.5.5",
     "debug": "^4.1.1",
     "primus": "^7.3.5",
     "primus-emitter": "^3.1.1",
     "uberproto": "^2.0.6"
   },
   "devDependencies": {
-    "@feathersjs/commons": "^4.5.3",
-    "@feathersjs/express": "^4.5.4",
-    "@feathersjs/feathers": "^4.5.3",
+    "@feathersjs/commons": "^4.5.5",
+    "@feathersjs/express": "^4.5.6",
+    "@feathersjs/feathers": "^4.5.5",
     "@feathersjs/tests": "^4.5.2",
     "feathers-memory": "^4.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mocha": "^8.0.1",
     "ws": "^7.3.1"
   },
